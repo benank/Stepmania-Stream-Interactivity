@@ -1,0 +1,8 @@
+{
+    "author": "benank",
+    "version": "1.0.0",
+    "dependencies": {
+        "dotenv": "^8.2.0",
+        "ws": "^7.3.1"
+    }
+}
