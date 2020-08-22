@@ -4,12 +4,6 @@ const ModHandler = require('./mods')
 // Called when a message from twitch comes, like bits or points redemption
 function HandleMessage(message)
 {
-    console.log("Got message in monitor")
-
-    console.log(message)
-    console.log(message.data.redemption.reward)
-    console.log(message.data.redemption.user)
-
     if (message.type == "reward-redeemed")
     {
         HandleChannelPointsRedeemed(message.data);

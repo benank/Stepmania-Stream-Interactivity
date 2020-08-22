@@ -41,7 +41,7 @@ local function remove(tbl, num_to_remove)
     return new_tbl
 end
 
-local DEBUG_ON = true
+local DEBUG_ON = false
 
 -- Print for debugging, only enabled if DEBUG_ON is true
 local function print(t)
@@ -193,7 +193,6 @@ local function OnSecondTick(s)
     -- If we should show a mod message
     if count_table(mod_text_queue) > 0 and
     GetTimeSinceStart() - mod_text_last_show_time > mod_text_delay_time then
-        print("try show text")
         ShowModText(mod_text_queue[1])
         mod_text_queue = remove(mod_text_queue, 1)
     end
@@ -217,7 +216,6 @@ end
 
 local function OnInit(s)
 
-    print("on init!")
     start_time = GetTimeSinceStart()
     time = 0
     
