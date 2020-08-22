@@ -20,7 +20,6 @@ function HandleMessage(message)
 
 function HandleChannelPointsRedeemed(data)
 {
-    console.log("HandleChannelPointsRedeemed");
     const mod = Rewards[data.redemption.reward.title];
     if (!mod)
     {
