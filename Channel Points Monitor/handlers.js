@@ -35,7 +35,14 @@ function HandleChannelPointsRedeemed(data)
     }
 
     // Activate mods from reward
-    ModHandler.ApplyMod(mod, data.redemption.user)
+    try
+    {
+        ModHandler.ApplyMod(mod, data.redemption.user, data.redemption.reward.title)
+    }
+    catch (error)
+    {
+        console.log(`************ Failed to ApplyMod. Exception: ${error}`)
+    }
 }
 
 function HandleBits(data)

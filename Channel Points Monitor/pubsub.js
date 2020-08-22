@@ -10,7 +10,7 @@ const Handlers = require("./handlers");
 HandlePingPong();
 
 ws.on('open', function open() {
-    console.log(`Connection established to ${WS_URL}. Setting up topic listeners...`);
+    console.log(`Connection established to ${WS_URL}. Setting everything up...`);
     ListenToTopic([`channel-points-channel-v1.${process.env.CHANNEL_ID}`, `channel-bits-events-v2.${process.env.CHANNEL_ID}`], process.env.TOKEN);
 });
 
@@ -46,7 +46,7 @@ function HandleMessage(message)
         }
         else
         {
-            console.log("Successfully set up topic listeners! We're good to go!")
+            console.log("All set up! We're good to go!")
         }
     }
     else if (message.type == "MESSAGE")
