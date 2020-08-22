@@ -97,7 +97,21 @@ local function CreateModObjectFromLine(line)
     }
 
     -- Strip out first 4 entries so we just get mod strings
-    data.mods = remove(split, 4)
+    split = remove(split, 4)
+    local mods = {}
+    local mod_types = {}
+
+    -- Store both the types and mod strings so we can ensure no overlapping same mod types
+    local index = 1
+    for i = 1, count_table(split), 2 do
+        mods[index] = split[i+1]
+        mod_types[index] = split[i]
+
+        index = index + 1
+    end
+
+    data.mods = mods
+    data.mod_types = mod_types
 
     return data
 end
@@ -113,16 +127,35 @@ local function GetModListString(i)
     return table.concat(current_mods_list, ",")
 end
 
+-- Returns whether a mod of a specific mod type is currently active
+local function IsAnyModActiveOfType(type)
+    for mod_type, mod_data in pairs(current_mods) do
+        if type == mod_type then return true end
+    end
+end
+
+-- Returns whether a mod entry can be activated based on other currently active mods
+local function CanActivateMod(mod_entry)
+
+    -- Mod with this same name is running
+    if current_mods[mod_entry.name] then return false end
+
+    -- A mod with the same mod type is running
+    for _, type in pairs(mod_entry) do
+        if IsAnyModActiveOfType(type) then return false end
+    end
+
+    return true
+end
+
 -- Get new mod string and update all current mods
 -- Mod code was inspired by Kyzentun
 local function RefreshActiveMods()
-
     for i = 1, 2 do
         local player_state = GAMESTATE:GetPlayerState("PlayerNumber_P" .. i)
         local player_mods = player_state:GetPlayerOptionsString('ModsLevel_Song')
         player_state:SetPlayerOptions('ModsLevel_Song', GetModListString(i))
     end
-
 end
 
 -- Check for new mods from file and put them in queued_mods
@@ -182,7 +215,7 @@ local function OnSecondTick(s)
 
     -- Check if we can add queued mods to current mods
     for _, mod_entry in pairs(queued_mods) do
-        if not current_mods[mod_entry.name] then
+        if CanActivateMod(mod_entry) then
             print(mod_entry.name .. " added to current mods")
             current_mods[mod_entry.name] = mod_entry
             queued_mods[_] = nil
@@ -252,7 +285,7 @@ return Def.ActorFrame{
     
 	Def.BitmapText{
 		Name= "mod_application_text", Font= "Common Large",
-		Text= "hello i am text",
+		Text= " ",
         InitCommand= function(s)
             text_element = s
             s:xy(SCREEN_CENTER_X, SCREEN_TOP + 180):diffuse(Color.White):strokecolor(Color.Black):diffusealpha(0)

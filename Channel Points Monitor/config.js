@@ -26,13 +26,13 @@ Mod =
 InputValidation = 
 {
     // Accepts input of percents, like 100% or 50%
-    [Mod.Drunk]: new RegExp('^drunk [0-9]+%$'),
+    [Mod.Drunk]: new RegExp('^[0-9]+% drunk$'),
 
     // Accepts input of percents, like 100% or 50%
-    [Mod.Dizzy]: new RegExp('^dizzy [0-9]+%$'),
+    [Mod.Dizzy]: new RegExp('^[0-9]+% dizzy$'),
 
     // Accepts input of percents, like 100% or 50%
-    [Mod.Twirl]: new RegExp('^twirl [0-9]+%$'),
+    [Mod.Twirl]: new RegExp('^[0-9]+% twirl$'),
 
     // Accepts speed inputs such as 3x, 5.5x, C500, M300, X400
     [Mod.Speed]: new RegExp('^((C|M|X)[1-9][0-9]*)|([0-9]+(.[0-9]+)?x)$'),
@@ -41,25 +41,25 @@ InputValidation =
 
     [Mod.Acceleration]: new RegExp('^(Normal)|(Boost)|(Brake)|(Wave)|(Expand)|(Boomerang)$'),
 
-    [Mod.Confusion]: new RegExp('^Confusion$'),
+    [Mod.Confusion]: new RegExp('^[0-9]+% confusion$'),
 
-    [Mod.Beat]: new RegExp('^Beat$'),
+    [Mod.Beat]: new RegExp('^[0-9]+% beat$'),
 
-    [Mod.Tornado]: new RegExp('^Tornado$'),
+    [Mod.Tornado]: new RegExp('^[0-9]+% tornado$'),
 
     [Mod.Appearance]: new RegExp('^(RandomVanish)|(Blink)|(Stealth)|(Sudden)|(Hidden)|(Dark)$'),
 
-    [Mod.RandomSpeed]: new RegExp('^RandomSpeed$'),
+    [Mod.RandomSpeed]: new RegExp('^[0-9]+% RandomSpeed$'),
     
     [Mod.Scroll]: new RegExp('^(Normal)|(Reverse)|(Split)|(Alternate)|(Cross)|(Centered)$'),
 
-    [Mod.Bumpy]: new RegExp('^Bumpy$'),
+    [Mod.Bumpy]: new RegExp('^[0-9]+% bumpy$'),
     
-    [Mod.Roll]: new RegExp('^Roll$'),
+    [Mod.Roll]: new RegExp('^[0-9]+% roll$'),
     
-    [Mod.XMode]: new RegExp('^XMode$'),
+    [Mod.XMode]: new RegExp('^[0-9]+% XMode$'),
     
-    [Mod.Tipsy]: new RegExp('^Tipsy$'),
+    [Mod.Tipsy]: new RegExp('^[0-9]+% tipsy$'),
     
     [Mod.Flip]: new RegExp('^Flip$'),
     

@@ -108,7 +108,7 @@ function Copy(t)
 // 9782348,displayname,10,drunk 100%,Tornado
 function Serialize(mod_list, user, reward_name)
 {
-    const param_list = mod_list.mods.map(mod_data => mod_data.params);
+    const param_list = mod_list.mods.map(mod_data => `${mod_data.type},${mod_data.params}`);
     return `${user.id},${user.display_name},${reward_name},${mod_list.time},${param_list.toString()}`;
 }
 
