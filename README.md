@@ -1,5 +1,5 @@
 # Stepmania-Stream-Interactivity
-Enables viewers to interact with your Stepmania game by redeeming channel points to enable mods.
+Enables viewers to interact with your Stepmania game by redeeming channel points to enable mods. Bits can also be used to "power up" these mod activations.
 
 ## Setting up
 
@@ -63,7 +63,10 @@ From here, when people redeem channel points, they should trigger the various mo
 6. Mods are applied from the queue if there is not already a mod of the same type running.
 7. After the set amount of time, the mod is cleared from the game.
 
-Keep in mind that this logic _only_ works during gameplay. If someone redeems channel points when you're not in a song, nothing will happen.
+Keep in mind that this logic _only_ works during gameplay. If someone redeems channel points when you're not in a song, it will store these in a file until you start playing a song. Mods are cleared on song end.
+
+### Powering Up Mods with Bits
+If someone uses bits, this is also detected by the monitor and is used to power up mods by extending the time that they last. By default, every 20 bits equals one extra second of mod activation time. So if someone uses 100 bits, then their next mod activation will last for an extra 5 seconds. These activation points disappear when you restart the monitoring program, so users should activate a mod quickly after using bits to power up. After activating a mod, more bits must be used to power up the next activation.
 
 ## Questions?
 Have questions about this, or need help setting it up? Feel free to message me on one of these platforms:
