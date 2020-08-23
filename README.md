@@ -31,6 +31,8 @@ t[#t+1] = LoadActor("Interactive");
 ```
 After you've done that, paste `Interactive` folder from `Stepmania Scripts` into `BGAnimations`.
 
+Now copy `Stepmania Scripts/new_mod.ogg` into `Stepmania/Themes/YOUR_THEME/BGAnimations`. You're good to go now!
+
 ### Twitch environment
 Open up `Channel Points Monitor/rewards.js`. This is where you define correlations between channel point rewards and the mods they trigger. There's a couple examples in there already, so you can follow that format to add more mods.
 
@@ -62,3 +64,17 @@ From here, when people redeem channel points, they should trigger the various mo
 7. After the set amount of time, the mod is cleared from the game.
 
 Keep in mind that this logic _only_ works during gameplay. If someone redeems channel points when you're not in a song, nothing will happen.
+
+## Questions?
+Have questions about this, or need help setting it up? Feel free to message me on one of these platforms:
+
+Discord: `StepOnIt#2565`
+
+Twitter: `@StepOnItDDR`
+
+## Credits
+Thanks to DDRDave for his [Stepmania Stream Tools](https://github.com/DaveLinger/Stepmania-Stream-Tools), which showed me that something like this was possible.
+
+Thanks to Kyzentun for some posts that I found on triggering mods with Lua. I used some code snippets to help me get started.
+
+Thanks to the [Simply Love theme](https://github.com/quietly-turning/Simply-Love-SM5) for the mod activation sound effect.

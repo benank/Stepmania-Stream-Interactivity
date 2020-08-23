@@ -177,18 +177,10 @@ local function CheckForNewModRequests()
 
 end
 
-local mod_text_queue = {}
-local mod_text_delay_time = 5 -- Delay between mod texts
-local mod_text_last_show_time = 0
--- Queues some mod text to be shown at the earliest available time
-local function QueueModText(text)
-    insert(mod_text_queue, text)
-end
-
 local function ShowModText(text)
     if not text then return end
-    text_element:settext(text):zoom(5):linear(0.3):diffusealpha(1):zoom(1):linear(5):zoom(1.5):linear(0.5):diffusealpha(0):zoom(0)
-    mod_text_last_show_time = GetTimeSinceStart()
+    text_element:stoptweening():settext(text):zoom(5):linear(0.3):diffusealpha(1):zoom(1):linear(5):zoom(1.5):linear(0.5):diffusealpha(0):zoom(0)
+    SOUND:PlayOnce(THEME:GetPathB("","new_mod.ogg"))
 end
 
 local function GetModTextString(mod_entry)
@@ -219,15 +211,8 @@ local function OnSecondTick(s)
             print(mod_entry.name .. " added to current mods")
             current_mods[mod_entry.name] = mod_entry
             queued_mods[_] = nil
-            QueueModText(GetModTextString(mod_entry))
+            ShowModText(GetModTextString(mod_entry))
         end
-    end
-
-    -- If we should show a mod message
-    if count_table(mod_text_queue) > 0 and
-    GetTimeSinceStart() - mod_text_last_show_time > mod_text_delay_time then
-        ShowModText(mod_text_queue[1])
-        mod_text_queue = remove(mod_text_queue, 1)
     end
 
     RefreshActiveMods()

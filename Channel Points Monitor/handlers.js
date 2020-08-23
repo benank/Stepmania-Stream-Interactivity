@@ -4,17 +4,19 @@ const ModHandler = require('./mods')
 // Called when a message from twitch comes, like bits or points redemption
 function HandleMessage(message)
 {
-    if (message.type == "reward-redeemed")
+    const type = message.type || message.message_type;
+    if (type == "reward-redeemed")
     {
         HandleChannelPointsRedeemed(message.data);
     }
-    else if (message.type == "bits??")
+    else if (type == "bits_event")
     {
         HandleBits(message.data);
     }
     else
     {
         console.log("Unsupported message type (You probably subscribed to some more events that we don't use)");
+        console.log(message);
     }
 }
 
@@ -40,7 +42,7 @@ function HandleChannelPointsRedeemed(data)
 
 function HandleBits(data)
 {
-    console.log("HandleBits")
+    ModHandler.ActivateBits({id: data.user_id, name: data.user_name}, data.bits_used);
 }
 
 

@@ -1,9 +1,7 @@
 // Class for handling activation of mods
 const Config = require('./config');
-const Rewards = require('./rewards');
 const fs = require('fs');
 const path = require('path');
-const { CLIENT_RENEG_WINDOW } = require('tls');
 
 const APPDATA = process.env.APPDATA || process.env.HOME;
 const file_path = "Stepmania 5/Save/Interaction.txt";
@@ -81,6 +79,8 @@ function ActivateBits(user, amount_of_bits)
     {
         users_with_bits[user.id] = 0
     }
+
+    console.log(`User with id ${user.id} used ${amount_of_bits} bits`);
     users_with_bits[user.id] = users_with_bits[user.id] + amount_of_bits;
 }
 
@@ -92,7 +92,7 @@ function GetExtraModTimeFromBits(user)
 {
     if (users_with_bits[user.id])
     {
-        const extra_seconds = math.floor(users_with_bits[user.id] * BITS_TO_SECONDS_CONVERSION)
+        const extra_seconds = Math.floor(users_with_bits[user.id] * BITS_TO_SECONDS_CONVERSION)
         users_with_bits[user.id] = 0;
         return extra_seconds;
     }
@@ -112,4 +112,4 @@ function Serialize(mod_list, user, reward_name)
     return `${user.id},${user.display_name},${reward_name},${mod_list.time},${param_list.toString()}`;
 }
 
-module.exports = {ApplyMod}
+module.exports = {ApplyMod, ActivateBits}
