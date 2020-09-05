@@ -219,7 +219,7 @@ module.exports =
         [
             {
                 type: Config.Mod.Acceleration,
-                params: "100% boomerang"
+                params: "Boomerang"
             }
         ],
     },
@@ -264,6 +264,17 @@ module.exports =
             {
                 type: Config.Mod.Speed,
                 params: "C600"
+            }
+        ],
+    },
+    "Mod: C800": 
+    {
+        time: 10,
+        mods: 
+        [
+            {
+                type: Config.Mod.Speed,
+                params: "C800"
             }
         ],
     },
