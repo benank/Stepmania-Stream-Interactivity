@@ -1,5 +1,6 @@
 const Rewards = require('./rewards');
-const ModHandler = require('./mods')
+const ModHandler = require('./mods');
+const SongRequestsHandler = require('./song_requests');
 
 // Called when a message from twitch comes, like bits or points redemption
 function HandleMessage(message)
@@ -26,6 +27,9 @@ function HandleChannelPointsRedeemed(data)
     if (!mod)
     {
         // Reward does not exist in rewards.js config - not handling it here (probably a different type of reward, unrelated)
+
+        // Try to handle a song request
+        SongRequestsHandler.SongRequest(data.redemption.reward.title, data.redemption.user, data.redemption.user_input);
         return;
     }
 
