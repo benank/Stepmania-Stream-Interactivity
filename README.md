@@ -12,7 +12,7 @@ CHANNEL_ID=YOUR_CHANNEL_ID_HERE
 You can find your channel ID by using the Twitch API. It's a bit difficult.
 
 For the OAuth token, you can use a website like [this](https://twitchtokengenerator.com/) to generate tokens. In the future, this
-funcionality will be integrated with this app.
+functionality will be integrated with this app.
 
 Navigate into `Channel Points Monitor` and run `npm i` to install the required node modules.
 
