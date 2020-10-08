@@ -1,5 +1,5 @@
 # Stepmania-Stream-Interactivity
-Enables viewers to interact with your Stepmania game by redeeming channel points to enable mods. Bits can also be used to "power up" these mod activations.
+Enables viewers to interact with your Stepmania game by redeeming channel points to enable mods. Bits can also be used to "power up" these mod activations. Also includes an integration with [Song Requests](https://github.com/DaveLinger/Stepmania-Stream-Tools).
 
 ## Setting up
 
@@ -40,6 +40,37 @@ The key of this list is the Twitch channel point reward title, like `Mod: Confus
 
 If you'd like some ideas on different mods that can be applied, take a look at `Channel Points Monitor/config.js`. In here, all the mod types are defined as well as expected arguments. This contains lists of arguments that will be accepted. If you get an error while adding new mods, you probably didn't match the expected arguments.
 
+### Song Requests
+
+If you'd like to allow viewers to redeem channel points to request songs (that show up in DDRDave's song request system), follow these steps.
+
+1. Set up the [Stepmania Stream Tools](https://github.com/DaveLinger/Stepmania-Stream-Tools) song requests.
+2. Create a new channel points reward on Twitch called `Song Request`. I would recommend something like this for the description:
+```
+Request a song! See the "REQUESTS" panel below the stream for more info! After you've found the song ID, enter the ID below! It will automatically be added to the queue! (ID must be a number!)
+```
+You should also require the viewer to enter text for the reward because they'll be entering the song ID to request it.
+
+3. Add the following two extra fields to your `.env` file.
+```
+WEBSITE_URL=YOUR_WEBSITE_URL_HERE
+SECURITY_KEY=YOUR_SECURITY_KEY_HERE
+```
+The website URL is the URL where your stepmania tools are hosted, aka where people can go to browse your song list. The security key is your stepmania tools stream key that you configured for those tools.
+
+4. You'll also need to edit `request.php` from the stepmania tools. Find where it says `function check_cooldown($user){` and then comment these three lines like so:
+```php
+	//if($numrows != 0){
+	//	echo "You are requesting songs too rapidly!";
+	//	die();
+	//}
+```
+This will ensure that there is no cooldown when requesting songs.
+
+5. Make sure to disable the relevant moobot commands if you have commands that viewers can use to request songs. You may want to restrict these to mod only so normal viewers have to use channel points to request songs.
+
+Keep in mind that you will still have to run the stepmania stream tools scripts in order to cross off songs when you play them. Everything else should work the same in the stream tools.
+
 ## Running it
 
 The node application uses a websocket to connect to Twitch pubsub and monitor for channel point redemptions. Navigate inside `Channel Points Monitor` and run the following command:
@@ -52,9 +83,9 @@ Connection established to wss://pubsub-edge.twitch.tv. Setting everything up...
 All set up! We're good to go!
 ```
 
-From here, when people redeem channel points, they should trigger the various mods that you set up.
+From here, when people redeem channel points, they should trigger the various mods that you set up. Additionally, if you set up the song requests feature, they'll need to use channel points to request songs.
 
-## How it works
+## How it works (mods)
 1. NodeJS app listens for channel point redemptions.
 2. It parses this data and serializes it into nice strings.
 3. It writes these strings to a file that Stepmania can read.
